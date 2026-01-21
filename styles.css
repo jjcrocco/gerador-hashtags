@@ -1,0 +1,483 @@
+/* ===================================================================
+// ARQUIVO: styles.css (Design Elegante e Otimizado)
+// =================================================================== */
+
+/* 1. VARIÁVEIS CSS (Temas) */
+/* ------------------------------------------------------------------- */
+:root {
+    /* Tema Claro (Default) */
+    --cor-principal: #007bff; /* Azul Principal */
+    --cor-fundo: #f8f9fa; /* Fundo mais claro */
+    --cor-fundo-card: #ffffff;
+    --cor-texto: #212529; /* Texto mais escuro para contraste */
+    --cor-borda: #dee2e6; /* Borda mais sutil */
+    --cor-sucesso: #28a745; /* Verde para Sucesso */
+    --cor-alerta: #e9ecef; /* Fundo cinza suave para Reset/Alerta */
+    --cor-contraste-header: #f0f0f0;
+    --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra suave padrão */
+    --radius: 8px; /* Raio de borda padrão */
+}
+
+/* Tema Escuro (Usa a classe 'dark-mode' que foi padronizada no JS) */
+body.dark-mode {
+    --cor-principal: #8ab4f8; /* Azul mais claro para Dark Mode */
+    --cor-fundo: #1e1e1e; /* Fundo mais escuro */
+    --cor-fundo-card: #2d2d2d; /* Cartões mais escuros */
+    --cor-texto: #e8e8e8; /* Texto claro */
+    --cor-borda: #444; /* Borda escura */
+    --cor-sucesso: #6aa84f; /* Verde adaptado */
+    --cor-alerta: #444; /* Fundo cinza suave para Reset/Alerta */
+    --cor-contraste-header: #2d2d2d;
+    --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* 2. ESTILOS GERAIS E LAYOUT DA PÁGINA */
+/* ------------------------------------------------------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    margin: 0;
+    padding-top: 60px; /* ESPAÇAMENTO PARA O HEADER FIXO */
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.main-title {
+    text-align: center;
+    color: var(--cor-principal);
+    margin-bottom: 40px;
+    font-size: 2.2em;
+}
+
+.section {
+    background-color: var(--cor-fundo-card);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-card);
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    color: var(--cor-principal);
+    border-bottom: 2px solid var(--cor-borda);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--cor-borda);
+    margin: 40px 0;
+}
+
+/* 3. NAVEGAÇÃO (HEADER e FOOTER) */
+/* ------------------------------------------------------------------- */
+header {
+    /* CORREÇÃO: Menu Fixo */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    /* FIM DA CORREÇÃO */
+    background-color: var(--cor-fundo-card);
+    border-bottom: 1px solid var(--cor-borda);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.container-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.container-nav a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.container-nav a:hover {
+    background-color: var(--cor-alerta);
+    color: var(--cor-principal);
+}
+
+.container-nav a.logo {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--cor-principal);
+    background: none;
+    padding: 0;
+}
+
+.container-nav a.active {
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo-card) !important;
+}
+
+#theme-toggle-header {
+    background-color: var(--cor-alerta);
+    color: var(--cor-texto);
+    border: none;
+    padding: 8px 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+#theme-toggle-header:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo-card);
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    color: var(--cor-texto);
+    opacity: 0.7;
+}
+
+footer a {
+    color: var(--cor-principal);
+    text-decoration: none;
+}
+
+/* Botões de Navegação da Home */
+.nav-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.nav-button {
+    text-decoration: none;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo-card);
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-card);
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    max-width: 350px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.nav-icon {
+    font-size: 2.5em;
+    margin-right: 15px;
+}
+
+.nav-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--cor-principal);
+    margin-bottom: 5px;
+}
+
+.nav-description {
+    font-size: 0.9em;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* 4. ESTILOS DO FORMULÁRIO (Formatação Cascata) */
+/* ------------------------------------------------------------------- */
+.select-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaço entre os campos */
+    margin-bottom: 20px;
+}
+
+.select-group > div {
+    flex: 1 1 220px; /* Base: 220px de largura mínima. Permite flexibilidade */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* Aplica o estilo de rótulo #SEGMENTO também aos filtros de frases prontas */
+.select-group label,
+#frases-prontas-filtros label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--cor-principal);
+}
+
+/* Aplica o mesmo estilo de campo de seleção em todo lugar */
+.select-group select,
+.select-group input[type="text"],
+#frases-prontas-filtros select { 
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    border: 1px solid var(--cor-borda);
+    background-color: var(--cor-fundo-card);
+    color: var(--cor-texto);
+    font-size: 1em;
+    height: 44px; /* Altura padronizada */
+    appearance: none; 
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.select-group select:disabled,
+#frases-prontas-filtros select:disabled { 
+    background-color: var(--cor-alerta);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.select-group select:focus,
+.select-group input[type="text"]:focus,
+#frases-prontas-filtros select:focus {
+    border-color: var(--cor-principal);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* 5. ÁREA DE RESULTADO E BOTÕES */
+/* ------------------------------------------------------------------- */
+#fraseMontada {
+    background-color: var(--cor-alerta);
+    padding: 15px 20px;
+    border-radius: var(--radius);
+    font-family: monospace;
+    font-size: 1.1em;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto);
+    margin-bottom: 5px; /* Reduzido para encaixar melhor com o texto de ajuda */
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#btnCopiar {
+    background-color: var(--cor-principal);
+    color: white;
+    flex-grow: 1;
+}
+
+#btnCopiar:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+#btnReset {
+    background-color: var(--cor-alerta);
+    color: var(--cor-texto);
+}
+
+#btnReset:hover {
+    background-color: #ccc;
+}
+
+/* Mensagem de Cópia */
+#copy-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    background-color: var(--cor-sucesso);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+    z-index: 1000;
+}
+
+#copy-message.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 6. FRASES PRONTAS */
+/* ------------------------------------------------------------------- */
+
+#frases-prontas-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Garante que os filtros de frases prontas fiquem em colunas, corrigindo a quebra */
+#frases-prontas-filtros > div {
+    flex: 1 1 45%; 
+    display: flex;
+    flex-direction: column;
+}
+
+.frase-pronta-grupo-titulo {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: var(--cor-texto);
+    font-size: 1.2em;
+    border-left: 4px solid var(--cor-principal);
+    padding-left: 10px;
+}
+
+.frases-prontas-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.frase-pronta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-alerta);
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    border: 1px solid var(--cor-borda);
+    transition: background-color 0.2s;
+}
+
+.frase-pronta-item:hover {
+    background-color: #dcdcdc; /* Um pouco mais escuro no hover */
+}
+
+body.dark-mode .frase-pronta-item:hover {
+    background-color: #3a3a3a;
+}
+
+/* CORREÇÃO: Aumento do tamanho da fonte da frase de exemplo */
+.frase-texto {
+    font-family: monospace;
+    font-size: 1.1em; 
+    word-break: break-all;
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.btn-copiar-pronta {
+    background-color: var(--cor-sucesso);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-copiar-pronta:hover {
+    background-color: #1e7e34;
+}
+
+/* 7. MEDIA QUERIES (Responsividade) */
+/* ------------------------------------------------------------------- */
+@media (max-width: 800px) {
+    /* Diminui o espaçamento e fonte para telas menores */
+    .container {
+        padding: 0 10px;
+    }
+
+    .main-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+    
+    /* Força os campos do formulário e dos filtros de frase a quebrar em colunas de 100% */
+    .select-group > div,
+    #frases-prontas-filtros > div {
+        flex: 1 1 100%; /* Ocupa 100% da largura em telas pequenas */
+    }
+
+    /* Navbar em telas pequenas */
+    .container-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-bottom: 8px;
+        font-size: 1.2em;
+    }
+    .nav-links {
+        width: 100%;
+        justify-content: space-around;
+        margin-bottom: 4px;
+        gap: 0;
+    }
+    .nav-links a {
+        padding: 4px 5px;
+        font-size: 0.9em;
+    }
+    #theme-toggle-header {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+
+    /* Quebra os botões de navegação da Home em coluna */
+    .nav-buttons-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .nav-button {
+        max-width: 100%;
+        transform: none !important; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+    }
+}

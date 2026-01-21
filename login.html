@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Gerador de Hashtags</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" style="max-width: 400px; margin-top: 100px;">
+        <div class="section">
+            <h2 class="main-title">🔐 Aceder ao Portal</h2>
+            <div class="select-group">
+                <input type="email" id="email" placeholder="E-mail" style="width: 100%; margin-bottom: 10px; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+                <input type="password" id="password" placeholder="Senha" style="width: 100%; margin-bottom: 20px; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+                <button id="btnLogin" class="nav-button mw" style="width: 100%; margin-bottom: 10px;">Entrar</button>
+                <button id="btnSignUp" class="nav-button precrm" style="width: 100%;">Criar Conta</button>
+            </div>
+            <p id="msg" style="color: red; margin-top: 10px; text-align: center;"></p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { supabase } from './config.js'
+
+        document.getElementById('btnLogin').onclick = async () => {
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            const { error } = await supabase.auth.signInWithPassword({ email, password })
+            if (error) document.getElementById('msg').innerText = error.message
+            else window.location.href = 'index.html'
+        }
+
+        document.getElementById('btnSignUp').onclick = async () => {
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+            const { error } = await supabase.auth.signUp({ email, password })
+            if (error) document.getElementById('msg').innerText = error.message
+            else alert("Conta criada! Verifique o seu e-mail.")
+        }
+    </script>
+</body>
+</html>

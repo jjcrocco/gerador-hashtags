@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador Inteligente | Home</title>
+    <link rel="icon" type="image/x-icon" href="icone.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <nav class="container-nav">
+        <span class="logo">✨ Gerador de Encerramentos</span>
+        <div class="nav-links">
+            <a href="cadastro.html">⚙️ Configurar Meu Setor</a>
+            <button id="logoutBtn" style="background:none; border:none; color:white; cursor:pointer;">Sair</button>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <h1 class="main-title" id="tituloSetor">A carregar o seu setor...</h1>
+
+    <div class="section" id="areaFiltros">
+        </div>
+
+    <div class="section output-section">
+        <h2>Frase Gerada:</h2>
+        <div id="fraseMontada" class="frase-box">Selecione as opções acima...</div>
+        <button class="btn-copiar" id="btnCopiar">Copiar Texto</button>
+    </div>
+</div>
+
+<script type="module">
+    import { supabase } from './config.js'
+
+    async function init() {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) { window.location.href = 'login.html'; return; }
+
+        const { data } = await supabase.from('categorias_hashtags').select('*').eq('user_id', user.id).single()
+
+        if (data) {
+            document.getElementById('tituloSetor').innerText = "Setor: " + data.nome_setor
+            renderizarCampos(data.dados_etapas)
+        } else {
+            document.getElementById('tituloSetor').innerText = "Configure o seu setor no botão acima ⚙️"
+        }
+    }
+
+    function renderizarCampos(etapas) {
+        const container = document.getElementById('areaFiltros')
+        etapas.forEach(etapa => {
+            const div = document.createElement('div')
+            div.className = 'select-group'
+            div.style.marginBottom = "20px"
+            div.innerHTML = `
+                <label style="display:block; margin-bottom:5px; font-weight:bold;">#${etapa.label.toUpperCase()}</label>
+                <select class="gen-select" style="width:100%; padding:10px; border-radius:8px;">
+                    <option value="">-- Selecione --</option>
+                    ${etapa.opcoes.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                </select>`
+            container.appendChild(div)
+        })
+
+        document.querySelectorAll('.gen-select').forEach(s => s.onchange = atualizarFrase)
+    }
+
+    function atualizarFrase() {
+        const tags = Array.from(document.querySelectorAll('.gen-select'))
+                          .map(s => s.value)
+                          .filter(v => v !== "")
+                          .join(' ')
+        document.getElementById('fraseMontada').innerText = tags || "Selecione as opções..."
+    }
+
+    document.getElementById('btnCopiar').onclick = () => {
+        navigator.clipboard.writeText(document.getElementById('fraseMontada').innerText)
+        alert("Copiado!")
+    }
+
+    document.getElementById('logoutBtn').onclick = async () => {
+        await supabase.auth.signOut()
+        window.location.href = 'login.html'
+    }
+
+    init()
+</script>
+</body>
+</html>
